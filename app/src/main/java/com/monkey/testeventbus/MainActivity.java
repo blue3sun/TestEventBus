@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity{
     //onEventMainThread()具体在哪个线程执行是看注解中的threadMode的值 从源码EventBus的post(Object event)可以看出来
     @Subscribe(threadMode = ThreadMode.MAIN)
     //@Subscribe //如果不指名threadMode = ThreadMode.MAIN那么如果在子线程发布的事件则会出现异常：在子线程中操作了UI
-    public void onEventMainThread(FirstEvent event) {
+    //public void onEventMainThread(FirstEvent event) {
+    //EventBus 3.0方法名无所谓叫什么名字了?? 貌似是的，因为源码中是用的反射调用有Subscribe注解的方法，与方法名无关
+    public void mainThread(FirstEvent event) {
         mTvInfo.setText(event.toString() + "\n" +
                 "Looper.getMainLooper()==Looper.myLooper():"+ (Looper.getMainLooper()==Looper.myLooper()));
     }
