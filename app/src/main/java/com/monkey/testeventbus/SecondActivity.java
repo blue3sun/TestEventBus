@@ -33,10 +33,22 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_first:
-                EventBus.getDefault().post(new FirstEvent("FirstEvent:This is a cat!!!"));
+                Thread thread1 = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        EventBus.getDefault().post(new FirstEvent("FirstEvent:This is a cat!!!"));
+                    }
+                });
+                thread1.start();
                 break;
             case R.id.btn_second:
-                EventBus.getDefault().post(new SecondEvent("SecondEvent:This is a dog!!!"));
+                Thread thread2 = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        EventBus.getDefault().post(new SecondEvent("SecondEvent:This is a dog!!!"));
+                    }
+                });
+                thread2.start();
                 break;
             case R.id.btn_third:
                 break;
